@@ -1,5 +1,5 @@
 from django.db import models
-# from user.models import User
+from user.models import User
 # from account import models
 
 # Create your models here.
@@ -25,10 +25,12 @@ class SubCategory(models.Model):
     ...
 
     """
+    def __str__(self):
+        return self.name
     name = models.CharField(max_length = 50)
     is_active = models.BooleanField(default=True)
     main_id = models.ForeignKey(MainCategory, on_delete = models.CASCADE, related_name = 'SubCategories')
-    # user_id = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'UsersCategories')
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'UsersSubCategories')
 
 class Activity(models.Model):
 
@@ -43,8 +45,8 @@ class Activity(models.Model):
     description = models.TextField()
     sub_category_id = models.ForeignKey(SubCategory, on_delete = models.CASCADE)
     main_category_id = models.ForeignKey(MainCategory, on_delete = models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'UsersActivities')
 
     #day_of_the_week = models.PositiveSmallIntegerField()
-    # user_id = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'UsersCategories')
 
 
