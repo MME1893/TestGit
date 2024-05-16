@@ -33,14 +33,23 @@ class SubCategory(APIView):
 class ActivityView(APIView):
 
     def post(self, request):
-
+        print(request)
+        print(request.data)
+        print(request.POST)
         serialized_data = ActivitySerializers(data=request.data)
-
+        # return Response(serialized_data.data)
+        # serialized_data = ActivitySerializers(data=request.POST)
         if not serialized_data.is_valid():
             return Response(serialized_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
         else:
-            return Response(serialized_data.data)
+            print(serialized_data.data)
+            # print(serialized_data.validated_data)
+            return Response(serialized_data.validated_data)
+            # return Response({"key":"hello"})
+            # test = {"key2":serialized_data.validated_data["start_time"]}
+            # return Response(test)
+            
 
     def get(self, request):
         user_id = request.query_params.get('user_id', -1)
