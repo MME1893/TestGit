@@ -1,11 +1,16 @@
 from rest_framework import serializers
-from .models import Activity,SubCategory
+from .models import Activity,SubCategory, MainCategory
+
+class MainCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+       model = MainCategory
+       fields = '__all__'
 
 class SubCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SubCategory
-        fields = "__all__"
+        fields = '__all__'
     # name = serializers.CharField()
     # user_id = serializers.IntegerField()
     # main_category_id = serializers.IntegerField()
